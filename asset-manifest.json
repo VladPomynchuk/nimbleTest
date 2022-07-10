@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/nimbleTest/static/js/main.9ed4b7c1.js",
+    "index.html": "/nimbleTest/index.html",
+    "main.9ed4b7c1.js.map": "/nimbleTest/static/js/main.9ed4b7c1.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.9ed4b7c1.js"
+  ]
+}
