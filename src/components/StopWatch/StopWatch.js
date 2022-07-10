@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, List } from './StopWatch.stylde';
+import { Container, List, Title } from './StopWatch.stylde';
 import AddForm from 'components/AddForm';
 import StopWatchItem from 'components/StopWatchItem';
 import { useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ const StopWatch = () => {
 
   return (
     <Container>
-      <h1>tracker</h1>
+      <Title>tracker</Title>
       <AddForm />
       <List>
         {items.map(item => (

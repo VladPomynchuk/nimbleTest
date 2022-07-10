@@ -1,10 +1,18 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 import moment from 'moment';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 import { updateItems } from 'redux/stopWatchSlice';
+import {
+  FormConatiner,
+  StyledInput,
+  StyledForm,
+  SubmitBtn,
+} from './AddForm.styled';
+import { BsFillPlayCircleFill } from 'react-icons/bs';
+import { useEffect } from 'react';
 
 const schema = yup.object({
   name: yup.string(),
@@ -28,18 +36,26 @@ const AddForm = () => {
   };
 
   return (
-    <div>
+    <FormConatiner>
       <Formik
         initialValues={initialValues}
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
-        <Form autoComplete="off">
-          <Field type="text" name="name" />
-          <button type="submit">add</button>
-        </Form>
+        <StyledForm autoComplete="off">
+          <StyledInput
+            type="text"
+            name="name"
+            placeholder="Enter tracker name"
+          />
+          <SubmitBtn type="submit">
+            <BsFillPlayCircleFill
+              style={{ width: '46px', height: '46px', fill: 'green' }}
+            />
+          </SubmitBtn>
+        </StyledForm>
       </Formik>
-    </div>
+    </FormConatiner>
   );
 };
 

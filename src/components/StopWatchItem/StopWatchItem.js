@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Item, Wrapper, StyledTitle } from './StopWatchItem.styled';
+import { Item, Wrapper, StyledTitle, Value } from './StopWatchItem.styled';
 import moment from 'moment';
 import normalizeTime from 'helpers/normalizeTime';
 import useStorage from 'hooks/useStorage';
 import { useDispatch } from 'react-redux';
 import { removeItem } from 'redux/stopWatchSlice';
+import ChangeBtn from 'components/ChangeBtn';
+import RemoveBtn from 'components/RemoveBtn';
 
 const StopWatchItem = ({ item }) => {
   const {
@@ -56,12 +58,12 @@ const StopWatchItem = ({ item }) => {
   };
 
   return (
-    <Item>
+    <Item isActive={isActive}>
       <StyledTitle>{item.name}</StyledTitle>
       <Wrapper>
-        <p>{normalizeTime(value)}</p>
-        <button onClick={handleClickStart}>start/stop</button>
-        <button onClick={handelClickRemove}>remove</button>
+        <Value>{normalizeTime(value)}</Value>
+        <ChangeBtn isActive={isActive} onClick={handleClickStart} />
+        <RemoveBtn onClick={handelClickRemove} />
       </Wrapper>
     </Item>
   );

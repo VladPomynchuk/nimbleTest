@@ -7,7 +7,6 @@ export const App = () => {
     <div>
       <GlobalStyle />
       <StopWatch />
-      {/* <Test /> */}
       <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
