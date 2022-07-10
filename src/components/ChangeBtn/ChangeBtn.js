@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai';
 import { StyledChangeBtn } from './ChangeBtn.styled';
+import PropTypes from 'prop-types';
 
 const ChangeBtn = ({ isActive, onClick }) => {
   return (
@@ -12,6 +13,11 @@ const ChangeBtn = ({ isActive, onClick }) => {
       )}
     </StyledChangeBtn>
   );
+};
+
+ChangeBtn.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ChangeBtn;

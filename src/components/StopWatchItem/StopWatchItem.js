@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { removeItem } from 'redux/stopWatchSlice';
 import ChangeBtn from 'components/ChangeBtn';
 import RemoveBtn from 'components/RemoveBtn';
+import PropTypes from 'prop-types';
 
 const StopWatchItem = ({ item }) => {
   const {
@@ -67,6 +68,13 @@ const StopWatchItem = ({ item }) => {
       </Wrapper>
     </Item>
   );
+};
+
+StopWatchItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
 };
 
 export default StopWatchItem;

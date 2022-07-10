@@ -12,7 +12,6 @@ import {
   SubmitBtn,
 } from './AddForm.styled';
 import { BsFillPlayCircleFill } from 'react-icons/bs';
-import { useEffect } from 'react';
 
 const schema = yup.object({
   name: yup.string(),
