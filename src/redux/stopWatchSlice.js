@@ -14,7 +14,9 @@ export const StopWatchSlice = createSlice({
       state.items = [payload, ...state.items];
     },
     removeItem(state, { payload }) {
-      state.items.filter(item => payload !== item.id);
+      state.items = state.items.filter(item => {
+        return item.id !== payload;
+      });
     },
   },
 });
@@ -30,7 +32,7 @@ export const itemsReducer = persistReducer(
   StopWatchSlice.reducer
 );
 
-export const { updateItems } = StopWatchSlice.actions;
+export const { updateItems, removeItem } = StopWatchSlice.actions;
 
 // Selectors
 export const getItems = state => state.stopWatchList.items;

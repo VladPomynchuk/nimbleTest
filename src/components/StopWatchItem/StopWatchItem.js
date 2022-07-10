@@ -3,6 +3,8 @@ import { Item, Wrapper, StyledTitle } from './StopWatchItem.styled';
 import moment from 'moment';
 import normalizeTime from 'helpers/normalizeTime';
 import useStorage from 'hooks/useStorage';
+import { useDispatch } from 'react-redux';
+import { removeItem } from 'redux/stopWatchSlice';
 
 const StopWatchItem = ({ item }) => {
   const {
@@ -14,6 +16,7 @@ const StopWatchItem = ({ item }) => {
     setIsActive,
   } = useStorage(item);
   const [intervalId, setIntervalId] = useState(null);
+  const dispatch = useDispatch();
 
   localStorage.setItem(
     item.id,
@@ -36,7 +39,7 @@ const StopWatchItem = ({ item }) => {
     }
   }, [isActive, setCurrentTime, setValue]);
 
-  const handleClick = () => {
+  const handleClickStart = () => {
     if (isActive) {
       clearInterval(intervalId);
       setIsActive(false);
@@ -46,13 +49,19 @@ const StopWatchItem = ({ item }) => {
     setIsActive(true);
   };
 
+  const handelClickRemove = () => {
+    clearInterval(intervalId);
+    localStorage.removeItem(item.id);
+    dispatch(removeItem(item.id));
+  };
+
   return (
     <Item>
       <StyledTitle>{item.name}</StyledTitle>
       <Wrapper>
         <p>{normalizeTime(value)}</p>
-        <button onClick={handleClick}>start/stop</button>
-        <button>remove</button>
+        <button onClick={handleClickStart}>start/stop</button>
+        <button onClick={handelClickRemove}>remove</button>
       </Wrapper>
     </Item>
   );
