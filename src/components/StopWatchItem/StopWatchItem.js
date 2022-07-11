@@ -34,7 +34,6 @@ const StopWatchItem = ({ item }) => {
     if (isActive) {
       setIntervalId(
         setInterval(() => {
-          console.log('interval useEffect');
           setValue(state => state + 1000);
           setCurrentTime(moment());
         }, 1000)
