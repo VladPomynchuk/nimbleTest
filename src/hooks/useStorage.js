@@ -1,39 +1,43 @@
 import { useState } from 'react';
 import moment from 'moment';
+const LS_KEY = 'values';
 
 const useStorage = item => {
+  const { id } = item;
+  const storage = JSON.parse(localStorage.getItem(LS_KEY));
   const [isActive, setIsActive] = useState(() => {
-    const storage = JSON.parse(localStorage.getItem(item.id));
-    return storage?.isActive ?? true;
+    return storage?.[id]?.isActive ?? true;
   });
-  const [currentTime, setCurrentTime] = useState(() => {
-    const storage = JSON.parse(localStorage.getItem(item.id));
-    return storage?.currentTime || null;
-  });
+
+  const currentTime = storage?.[id]?.currentTime || null;
   const [value, setValue] = useState(() => {
-    const storage = JSON.parse(localStorage.getItem(item.id));
-    if (storage?.isActive) {
-      return storage.value + moment().diff(storage.currentTime);
+    if (storage?.[id]?.isActive) {
+      return storage?.[id]?.value + moment().diff(storage?.[id].currentTime);
     }
-    return storage?.value || 0;
+    return storage?.[id]?.value || 0;
   });
-  console.log(moment().valueOf());
+
   localStorage.setItem(
-    item.id,
+    LS_KEY,
     JSON.stringify({
-      currentTime: moment().valueOf(),
-      isActive: isActive,
-      value: value,
+      ...storage,
+      [id]: { value: value, currentTime: moment(), isActive: isActive },
     })
   );
+
+  const deleteItem = () => {
+    delete storage?.[id];
+
+    localStorage.setItem(LS_KEY, JSON.stringify(storage));
+  };
 
   return {
     currentTime,
     isActive,
     value,
     setValue,
-    setCurrentTime,
     setIsActive,
+    deleteItem,
   };
 };
 

@@ -32,7 +32,8 @@ export const itemsReducer = persistReducer(
   StopWatchSlice.reducer
 );
 
-export const { updateItems, removeItem } = StopWatchSlice.actions;
+export const { updateItems, removeItem, updateValue } = StopWatchSlice.actions;
 
 // Selectors
 export const getItems = state => state.stopWatchList.items;
+export const getValues = state => state.stopWatchList.values;

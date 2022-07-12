@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Item, Wrapper, StyledTitle, Value } from './StopWatchItem.styled';
-import moment from 'moment';
 import normalizeTime from 'helpers/normalizeTime';
 import useStorage from 'hooks/useStorage';
 import { useDispatch } from 'react-redux';
@@ -10,7 +9,7 @@ import RemoveBtn from 'components/RemoveBtn';
 import PropTypes from 'prop-types';
 
 const StopWatchItem = ({ item }) => {
-  const { isActive, value, setValue, setCurrentTime, setIsActive } =
+  const { isActive, value, setValue, setIsActive, deleteItem } =
     useStorage(item);
   const [intervalId, setIntervalId] = useState(null);
   const dispatch = useDispatch();
@@ -19,12 +18,12 @@ const StopWatchItem = ({ item }) => {
     if (isActive) {
       setIntervalId(
         setInterval(() => {
+          console.log('interval');
           setValue(state => state + 1000);
-          setCurrentTime(moment());
         }, 1000)
       );
     }
-  }, [isActive, setCurrentTime, setValue]);
+  }, [isActive, setValue]);
 
   const handleClickStart = () => {
     if (isActive) {
@@ -38,7 +37,7 @@ const StopWatchItem = ({ item }) => {
 
   const handelClickRemove = () => {
     clearInterval(intervalId);
-    localStorage.removeItem(item.id);
+    deleteItem();
     dispatch(removeItem(item.id));
   };
 
