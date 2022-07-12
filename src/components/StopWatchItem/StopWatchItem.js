@@ -10,25 +10,10 @@ import RemoveBtn from 'components/RemoveBtn';
 import PropTypes from 'prop-types';
 
 const StopWatchItem = ({ item }) => {
-  const {
-    isActive,
-    currentTime,
-    value,
-    setValue,
-    setCurrentTime,
-    setIsActive,
-  } = useStorage(item);
+  const { isActive, value, setValue, setCurrentTime, setIsActive } =
+    useStorage(item);
   const [intervalId, setIntervalId] = useState(null);
   const dispatch = useDispatch();
-
-  localStorage.setItem(
-    item.id,
-    JSON.stringify({
-      currentTime: currentTime,
-      isActive: isActive,
-      value: value,
-    })
-  );
 
   useEffect(() => {
     if (isActive) {

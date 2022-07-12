@@ -17,10 +17,19 @@ const useStorage = item => {
     }
     return storage?.value || 0;
   });
+  console.log(moment().valueOf());
+  localStorage.setItem(
+    item.id,
+    JSON.stringify({
+      currentTime: moment().valueOf(),
+      isActive: isActive,
+      value: value,
+    })
+  );
 
   return {
-    isActive,
     currentTime,
+    isActive,
     value,
     setValue,
     setCurrentTime,
