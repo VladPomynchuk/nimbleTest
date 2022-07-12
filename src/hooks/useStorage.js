@@ -4,12 +4,14 @@ const LS_KEY = 'values';
 
 const useStorage = item => {
   const { id } = item;
+
   const storage = JSON.parse(localStorage.getItem(LS_KEY));
+  const currentTime = storage?.[id]?.currentTime || null;
+
   const [isActive, setIsActive] = useState(() => {
     return storage?.[id]?.isActive ?? true;
   });
 
-  const currentTime = storage?.[id]?.currentTime || null;
   const [value, setValue] = useState(() => {
     if (storage?.[id]?.isActive) {
       return storage?.[id]?.value + moment().diff(storage?.[id].currentTime);

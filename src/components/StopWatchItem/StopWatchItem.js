@@ -18,7 +18,6 @@ const StopWatchItem = ({ item }) => {
     if (isActive) {
       setIntervalId(
         setInterval(() => {
-          console.log('interval');
           setValue(state => state + 1000);
         }, 1000)
       );
